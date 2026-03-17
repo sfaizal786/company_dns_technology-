@@ -19,59 +19,61 @@
 
     <header class="header">
         <h1>Company Technology</h1>
-        <p>Find Company Technology by Single Search or Bulk CSV Upload</p>
-    </header>
+        <p class="marquee">
+            <span>Find Company Technology by Single Search or Bulk CSV Upload</span>
+        </p>
 
-    <section class="panel">
+        <section class="panel">
 
-        <div class="tabs">
-            <button class="tab active" id="singleTab">Single Search</button>
-            <button class="tab" id="bulkTab">Bulk Search</button>
-        </div>
+            <div class="tabs">
+                <button class="tab active" id="singleTab">Single Search</button>
+                <button class="tab" id="bulkTab">Bulk Search</button>
+            </div>
 
-        <div class="search-wrapper">
+            <div class="search-wrapper">
 
-            <form class="single-search" id="singleForm">
-                <input type="text" placeholder="Enter company name (Microsoft, Amazon, Google)">
-                <button type="submit">Search</button>
-            </form>
+                <form class="single-search" id="singleForm">
+                    <input type="text" placeholder="Enter company name (Microsoft, Amazon, Google)">
+                    <button type="submit">Search</button>
+                </form>
 
-            <form class="bulk-search" id="bulkForm" style="display:none;">
-                <label class="upload-label">Upload CSV</label>
+                <form class="bulk-search" id="bulkForm" style="display:none;">
+                    <label class="upload-label">Upload CSV</label>
 
-                <div class="upload-box">
-                    <input type="file" id="csvFile" accept=".csv">
-                    <label for="csvFile" class="custom-file">Choose CSV</label>
-                    <span id="fileName">No file chosen</span>
-                </div>
+                    <div class="upload-box">
+                        <input type="file" id="csvFile" accept=".csv">
+                        <label for="csvFile" class="custom-file">Choose CSV</label>
+                        <span id="fileName">No file chosen</span>
+                    </div>
 
-                <button type="submit" class="upload-btn">Upload</button>
-            </form>
+                    <button type="submit" class="upload-btn">Upload</button>
+                </form>
 
-        </div>
+            </div>
 
-    </section>
+        </section>
 
-    <section class="results">
+        <section class="results">
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Sr no.</th>
-                    <th>Company Name</th>
-                    <th>Technology</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr no.</th>
+                        <th>Company Name</th>
+                        <th>Technology</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
 
-        <button id="downloadBtn" style="display:none; margin-top:20px;">
-            Download Data
-        </button>
+            <button id="downloadBtn" style="display:none; margin-top:20px;">
+                Download Data
+            </button>
 
-    </section>
+        </section>
 
-    <script src="script/scripts.js" defer></script>
+        <script src="script/scripts.js" defer></script>
 
 </body>
+
 </html>
