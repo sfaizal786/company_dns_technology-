@@ -15,7 +15,6 @@ app.use(express.static(path.resolve(__dirname, "public")));
 
 // ================= CONFIG =================
 
-// Words that are NOT technologies
 const STOP_WORDS = new Set([
   "_spf", "spf", "protection", "email", "com", "net", "org", "co",
   "redirect", "mg", "asv", "stspg"
@@ -26,7 +25,7 @@ const VOWEL_RATIO_THRESHOLD = 0.2;
 
 // ================= HELPERS =================
 
-// Clean technology name
+// 🔥 MULTI-WORD TECHNOLOGY SUPPORT
 function formatTech(raw) {
   if (!raw) return "";
 
@@ -37,10 +36,19 @@ function formatTech(raw) {
     .replace(/[^a-zA-Z ]/g, " ")
     .trim();
 
-  const word = cleaned.split(/\s+/)[0];
-  if (!word) return "";
+  let words = cleaned
+    .split(/\s+/)
+    .filter(w => w.length > 2);
 
-  return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+  if (words.length === 0) return "";
+
+  // 🔥 take first 2 words (Neat Pulse, Status Page)
+  let result = words.slice(0, 2).join(" ");
+
+  return result
+    .split(" ")
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+    .join(" ");
 }
 
 
@@ -57,7 +65,7 @@ function isValidTech(word) {
 
   if (w.length <= 3) return false;
   if (/[0-9]/.test(w)) return false;
-  if (w.length > 12) return false;
+  if (w.length > 20) return false;
   if (STOP_WORDS.has(w)) return false;
 
   const vowels = w.match(/[aeiou]/g) || [];
@@ -86,7 +94,7 @@ function extractFromIncludes(text, set) {
 }
 
 
-// key=value (docker-verification, etc.)
+// key=value
 function extractFromKeyValues(text, set) {
   const matches = text.match(/[a-z0-9_-]+=/g);
   if (!matches) return;
@@ -102,7 +110,7 @@ function extractFromKeyValues(text, set) {
 }
 
 
-// ALL domains (IMPORTANT for SPF: vali.email, outlook.com)
+// ALL domains (important for SPF)
 function extractFromDomains(text, set) {
   const matches = text.match(/[a-z0-9.-]+\.[a-z]{2,}/g);
   if (!matches) return;
